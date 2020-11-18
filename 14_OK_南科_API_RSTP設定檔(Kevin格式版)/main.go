@@ -21,7 +21,9 @@ import (
 
 var log_info logrus.Logger
 var log_err logrus.Logger
-var config objects.Config
+
+//設定檔
+var config objects.Config = objects.Config{}
 
 func main() {
 
@@ -36,10 +38,11 @@ func main() {
 	//讀入config
 	readConfig()
 
+	fmt.Println("API port:", config.PortOfAPI)
+
 	// 建立Server
 	apiServerPointer := &http.Server{
-		//Addr:           ":8007",
-		Addr:           config.portofAPI,
+		Addr:           ":" + config.PortOfAPI,
 		Handler:        router,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
@@ -111,12 +114,12 @@ func dailyAPIHandler(w http.ResponseWriter, r *http.Request) {
 // 讀設定檔
 func readConfig() {
 
-	File, err := os.Open("config.ini")
+	File, err := os.Open("config.json")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println("成功開啟 config.ini")
+	fmt.Println("成功開啟 config.json")
 	defer File.Close()
 
 	byteValue, _ := ioutil.ReadAll(File)
@@ -127,8 +130,7 @@ func readConfig() {
 		panic(err)
 
 		log_err.WithFields(logrus.Fields{
-			"trace": "trace-0001",
-			"err":   err,
+			"err": err,
 		}).Error("將設定讀到config變數中失敗")
 
 		fmt.Println(err)
