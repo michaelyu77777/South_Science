@@ -1,0 +1,9 @@
+{
+    "DBServer":"",
+    "DBPort":"",
+    "DBId":"",
+    "DBPassword":"",
+    "DBName":"SouthernScience",
+    "DBCollectionName":"rtsp_config",
+    "PortOfAPI" : "8009"
+}
