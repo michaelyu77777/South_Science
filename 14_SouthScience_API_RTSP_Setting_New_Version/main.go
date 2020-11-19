@@ -124,22 +124,18 @@ func init_config() {
 
 func main() {
 
-	// 建立新路由
+	//建立新路由
 	router := mux.NewRouter()
 
 	// 建立路由路徑與Handler
-	router.HandleFunc(`/SouthSience/RtspConfig/query`, dailyAPIHandler)
+	// router.HandleFunc(`/SouthSience/RtspConfig/query`, dailyAPIHandler)
+	router.HandleFunc(config.Servers.RTSPSettingServer.Path, dailyAPIHandler)
 
 	log_info.WithFields(logrus.Fields{}).Info("建立路由路徑")
 
-	//讀入config
-	// readConfig()
-
-	fmt.Println("API port:", config.PortOfAPI)
-
 	// 建立Server
 	apiServerPointer := &http.Server{
-		Addr:           ":" + config.PortOfAPI,
+		Addr:           ":" + config.Servers.RTSPSettingServer.Port,
 		Handler:        router,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
@@ -167,8 +163,8 @@ func dailyAPIHandler(w http.ResponseWriter, r *http.Request) {
 
 	//取Collection
 	content, err := mongoClientPointer.
-		Database(`SouthernScience`).
-		Collection(`rtsp_config`).
+		Database(config.Databases.MongoDB.Database).
+		Collection(config.Databases.MongoDB.Collection).
 		Find(context.TODO(), bson.M{"EnableAudioStream": false}) //find all
 
 	log_info.WithFields(logrus.Fields{}).Info("找collection全部")
@@ -209,29 +205,3 @@ func dailyAPIHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", string(jsonBytes)) // 寫入回應
 
 }
-
-// 讀設定檔
-// func readConfig() {
-
-// 	File, err := os.Open("config.json")
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-
-// 	fmt.Println("成功開啟 config.json")
-// 	defer File.Close()
-
-// 	byteValue, _ := ioutil.ReadAll(File)
-
-// 	//將json設定轉存入變數
-// 	err = json.Unmarshal(byteValue, &config)
-// 	if err != nil {
-// 		panic(err)
-
-// 		log_err.WithFields(logrus.Fields{
-// 			"err": err,
-// 		}).Error("將設定讀到config變數中失敗")
-
-// 		fmt.Println(err)
-// 	}
-// }

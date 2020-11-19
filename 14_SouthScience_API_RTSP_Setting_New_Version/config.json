@@ -1,9 +1,27 @@
 {
-    "DBServer":"",
-    "DBPort":"",
-    "DBId":"",
-    "DBPassword":"",
-    "DBName":"SouthernScience",
-    "DBCollectionName":"rtsp_config",
-    "PortOfAPI" : "8009"
+    "local":{
+
+    },
+
+    "databases":{
+
+        "MongoDB":{
+            "server":"",
+            "port":"27017",
+            "userid":"leapsy",
+            "password":"lepasyleapsy",
+            "database":"SouthernScience",
+            "collection":"rtsp_config"
+        }
+
+    },
+
+    
+    "servers":{
+        "RTSPSettingServer":{
+            "host" : "",
+            "path" : "/SouthSience/RtspConfig/query",
+            "port" : "8009"
+        }
+    }
 }
