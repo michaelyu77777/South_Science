@@ -54,3 +54,9 @@
 {"level":"info","msg":"建立Server","time":"2020-11-19T15:27:50+08:00"}
 {"level":"info","msg":"連線資料庫","time":"2020-11-19T15:29:09+08:00"}
 {"level":"info","msg":"找collection全部","time":"2020-11-19T15:29:09+08:00"}
+{"level":"info","msg":"結束Info等級設定","time":"2020-11-19T15:57:25+08:00"}
+{"level":"info","msg":"結束Error等級設定","time":"2020-11-19T15:57:25+08:00"}
+{"level":"info","msg":"打開config設定檔","time":"2020-11-19T15:57:25+08:00"}
+{"level":"info","msg":"轉換config成json","time":"2020-11-19T15:57:25+08:00"}
+{"level":"info","msg":"建立路由路徑","time":"2020-11-19T15:57:25+08:00"}
+{"level":"info","msg":"建立Server","time":"2020-11-19T15:57:25+08:00"}
